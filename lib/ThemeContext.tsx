@@ -1,10 +1,10 @@
-'use client';
+"use client"
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react"
 
 export const ThemeContext = createContext({
   isDark: false,
   toggleTheme: () => {},
-});
+})
 
-export const useThemeMode = () => useContext(ThemeContext);
+export const useThemeMode = () => useContext(ThemeContext)
