@@ -207,7 +207,6 @@ function TemplateCard({
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 1.25, pr: 3 }}>
         {template.logo.startsWith("http") ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <Box
             component="img"
             src={template.logo}
@@ -373,7 +372,6 @@ function StepTabs({ step }: { step: number }) {
 
 /* ─── project type option card ───────────────────────────────── */
 function TypeCard({
-  value,
   label,
   desc,
   icon,
@@ -472,7 +470,10 @@ export default function CorporateInitializer() {
   /* reset incompatible selections when type changes */
   useEffect(() => {
     if (projectType === "backend") setSelectedFrontendId(null)
-    if (projectType === "frontend") setSelectedBackendId(null)
+    if (projectType === "frontend") {
+      setSelectedBackendId(null)
+      setIncludeDocker(false)
+    }
   }, [projectType])
 
   /* animate content + progress bar on step change */
@@ -772,7 +773,7 @@ export default function CorporateInitializer() {
 
                 {/* docker toggle */}
                 <Box
-                  onClick={() => setIncludeDocker((d) => !d)}
+                  onClick={() => projectType !== "frontend" && setIncludeDocker((d) => !d)}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -780,12 +781,13 @@ export default function CorporateInitializer() {
                     mt: 2.5,
                     p: 1.75,
                     borderRadius: "10px",
-                    cursor: "pointer",
-                    border: `1.5px solid ${includeDocker ? ACCENT : BORDER}`,
-                    background: includeDocker ? ACCENT_LIGHT : dark ? "#1a1d30" : "#fafafa",
+                    cursor: projectType === "frontend" ? "not-allowed" : "pointer",
+                    opacity: projectType === "frontend" ? 0.4 : 1,
+                    border: `1.5px solid ${includeDocker && projectType !== "frontend" ? ACCENT : BORDER}`,
+                    background: includeDocker && projectType !== "frontend" ? ACCENT_LIGHT : dark ? "#1a1d30" : "#fafafa",
                     transition: "all 0.2s",
                     userSelect: "none",
-                    "&:hover": { borderColor: ACCENT },
+                    "&:hover": projectType === "frontend" ? {} : { borderColor: ACCENT },
                   }}
                 >
                   <Box

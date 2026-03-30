@@ -235,7 +235,6 @@ function generateDockerCompose(
     const ctx = hasBoth ? "./frontend" : "."
     const isAngular = frontend.badge === "Angular"
     // Angular production build is served by nginx on port 80
-    const port = isAngular ? "80" : "3000"
     const expose = isAngular ? "80:80" : "3000:3000"
 
     lines.push(

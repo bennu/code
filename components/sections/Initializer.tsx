@@ -163,7 +163,7 @@ function HistoryLine({ entry }: { entry: HistoryEntry }) {
             =
           </Box>
           <Box component="span" sx={{ color: TEXT }}>
-            "{entry.value}"
+            &quot;{entry.value}&quot;
           </Box>
         </Box>
       )}
@@ -430,14 +430,6 @@ export default function Initializer() {
     setHistory((prev) => [...prev, { id: _uid++, type: "success", label, value }])
   }, [])
 
-  const goToPhase = useCallback(
-    (next: number) => {
-      setPhaseHistory((prev) => [...prev, phase])
-      setPhase(next)
-    },
-    [phase],
-  )
-
   /* auto-scroll */
   useEffect(() => {
     terminalRef.current?.scrollTo({ top: terminalRef.current.scrollHeight, behavior: "smooth" })
@@ -587,7 +579,12 @@ export default function Initializer() {
             : "solo frontend"
       addSuccess("project_type", typeLabel)
       setPhaseHistory((prev) => [...prev, 1])
-      setPhase(2)
+      if (projectType === "frontend") {
+        setIncludeDocker(false)
+        setPhase(5)
+      } else {
+        setPhase(2)
+      }
     } else if (phase === 3) {
       addSuccess("backend", selectedBackend?.name ?? "none")
       setPhaseHistory((prev) => [...prev, 3])
