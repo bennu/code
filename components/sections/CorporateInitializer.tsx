@@ -59,11 +59,11 @@ function renderTree(nodes: TreeNode[], prefix = ""): string[] {
   const lines: string[] = []
   nodes.forEach((node, idx) => {
     const isLast = idx === nodes.length - 1
-    const connector = isLast ? "└──" : "├──"
+    const connector = isLast ? "└── " : "├── "
     const icon = node.isDir ? "📁" : getFileIcon(node.name)
-    lines.push(`${prefix}${connector} ${icon} ${node.name}${node.isDir ? "/" : ""}`)
+    lines.push(`${prefix}${connector}${icon} ${node.name}${node.isDir ? "/" : ""}`)
     if (node.children.length > 0)
-      lines.push(...renderTree(node.children, prefix + (isLast ? "    " : "│   ")))
+      lines.push(...renderTree(node.children, prefix + (isLast ? "     " : "│    ")))
   })
   return lines
 }
@@ -302,7 +302,7 @@ function FileTreeBlock({
             <Box
               key={i}
               sx={{
-                fontFamily: MONO,
+                fontFamily: "'Courier New', Courier, monospace",
                 fontSize: "0.73rem",
                 color: "#94a3b8",
                 whiteSpace: "pre",

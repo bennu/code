@@ -96,7 +96,7 @@ function postgresDb(): DbConfig {
   return {
     serviceLines: [
       `  db:`,
-      `    image: postgres:16-alpine`,
+      `    image: postgres:17-alpine`,
       `    environment:`,
       `      - POSTGRES_DB=appdb`,
       `      - POSTGRES_USER=postgres`,
@@ -120,7 +120,7 @@ function mysqlDb(): DbConfig {
   return {
     serviceLines: [
       `  db:`,
-      `    image: mysql:8.0`,
+      `    image: mysql:8.4`,
       `    environment:`,
       `      - MYSQL_DATABASE=appdb`,
       `      - MYSQL_ROOT_PASSWORD=root`,
@@ -201,7 +201,7 @@ function generateDockerCompose(
   composeInDeployments: boolean,
 ): string {
   const hasBoth = !!(backend && frontend)
-  const lines: string[] = [`version: '3.8'`, "", "services:"]
+  const lines: string[] = ["services:"]
 
   const backendProfile = backend ? getBackendProfile(backend) : null
   const hasDb = !!backendProfile?.db
@@ -254,7 +254,7 @@ function generateDockerCompose(
       lines.push(`    environment:`)
       frontendEnv.forEach((v) => lines.push(`      - ${v}`))
     }
-    if (hasBoth) lines.push(`    depends_on:`, `      - backend`)
+    if (hasBoth) lines.push(`    depends_on:`, `      backend:`, `        condition: service_started`)
     if (needsNetwork) lines.push(`    networks:`, `      - app-network`)
     lines.push(`    restart: unless-stopped`)
   }
@@ -267,7 +267,7 @@ function generateDockerCompose(
 
   /* ── networks ── */
   if (needsNetwork) {
-    lines.push("", "networks:", "  app-network:", "    driver: bridge")
+    lines.push("", "networks:", "  app-network:")
   }
 
   /* ── volumes ── */
