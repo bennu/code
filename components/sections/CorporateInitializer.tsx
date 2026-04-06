@@ -68,6 +68,20 @@ function renderTree(nodes: TreeNode[], prefix = ""): string[] {
   return lines
 }
 
+function fixPkgOrder(paths: string[], groupId: string): string[] {
+  if (!groupId || !groupId.includes(".")) return paths
+  const revParts = groupId.split(".").reverse()
+  const rev = revParts.join("/")
+  const fwd = groupId.split(".").join("/")
+  return paths
+    .filter((p) => {
+      if (!p.endsWith("/")) return true
+      const seg = p.slice(0, -1).split("/").pop() ?? ""
+      return !(revParts.slice(0, -1).includes(seg) && paths.some((q) => q.startsWith(p) && q.includes(rev)))
+    })
+    .map((p) => p.split(rev).join(fwd))
+}
+
 async function fetchTreePaths(template: TemplateItem): Promise<string[]> {
   try {
     const url = `https://api.github.com/repos/${GITHUB_OWNER}/${template.repo}/git/trees/${template.branch}?recursive=1`
@@ -506,12 +520,12 @@ export default function CorporateInitializer() {
     const fetches: Promise<void>[] = []
     if (selectedBackend && backendTreeLines.length === 0)
       fetches.push(
-        fetchTreePaths(selectedBackend).then((p) => setBackendTreeLines(renderTree(buildTree(p)))),
+        fetchTreePaths(selectedBackend).then((p) => setBackendTreeLines(renderTree(buildTree(fixPkgOrder(p, groupId))))),
       )
     if (selectedFrontend && frontendTreeLines.length === 0)
       fetches.push(
         fetchTreePaths(selectedFrontend).then((p) =>
-          setFrontendTreeLines(renderTree(buildTree(p))),
+          setFrontendTreeLines(renderTree(buildTree(fixPkgOrder(p, groupId)))),
         ),
       )
     if (fetches.length === 0) {
