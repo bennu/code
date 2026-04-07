@@ -28,7 +28,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Bennu Inicializador",
+  title: "Bennu code",
   description: "Genera proyectos fullstack listos para producción en segundos",
   icons: {
     icon: "/icon.svg",
