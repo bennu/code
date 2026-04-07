@@ -30,6 +30,9 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Bennu Inicializador",
   description: "Genera proyectos fullstack listos para producción en segundos",
+  icons: {
+    icon: "/icon.svg",
+  },
 }
 
 export default function RootLayout({
