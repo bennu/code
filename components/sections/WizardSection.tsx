@@ -59,7 +59,7 @@ export default function WizardSection() {
   }
 
   return (
-    <Box id="initializer" sx={{ position: "relative" }}>
+    <Box id="code" sx={{ position: "relative", scrollMarginTop: "80px" }}>
       {/* ── floating toggle ── */}
       <Box
         sx={{

@@ -56,13 +56,6 @@ function MoonIcon() {
 export default function Navbar() {
   const { isDark, toggleTheme } = useThemeMode()
 
-  const handleNavClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
     <AppBar
       position="fixed"
@@ -83,8 +76,8 @@ export default function Navbar() {
           padding: "1rem 2rem",
         }}
       >
-        <Typography
-          component="span"
+        <MuiLink
+          href="#"
           sx={{
             fontFamily: "var(--font-michroma)",
             fontSize: "1.3rem",
@@ -92,10 +85,12 @@ export default function Navbar() {
             letterSpacing: "2px",
             color: isDark ? "#f0f0f0" : "#000",
             transition: "color 0.3s ease",
+            textDecoration: "none",
+            "&:hover": { color: "#9c27b0" },
           }}
         >
           code
-        </Typography>
+        </MuiLink>
 
         <Box sx={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <MuiLink
@@ -115,8 +110,7 @@ export default function Navbar() {
             Bennu Site
           </MuiLink>
           <MuiLink
-            component="button"
-            onClick={() => handleNavClick("initializer")}
+            href="#code"
             sx={{
               textDecoration: "none",
               color: isDark ? "#f0f0f0" : "#000",
@@ -125,9 +119,6 @@ export default function Navbar() {
               cursor: "pointer",
               transition: "color 0.3s ease",
               "&:hover": { color: "#9c27b0" },
-              border: "none",
-              background: "none",
-              padding: 0,
             }}
           >
             Inicializador

@@ -510,7 +510,7 @@ export default function CorporateInitializer() {
   }, [step])
 
   useEffect(() => {
-    inputRef.current?.focus()
+    inputRef.current?.focus({ preventScroll: true })
   }, [step])
 
   /* fetch trees when entering step 2 */
@@ -738,7 +738,6 @@ export default function CorporateInitializer() {
                   placeholder="my-awesome-app"
                   variant="outlined"
                   fullWidth
-                  autoFocus
                   sx={textFieldSx}
                 />
 
@@ -928,7 +927,6 @@ export default function CorporateInitializer() {
                           placeholder="com.miempresa"
                           variant="outlined"
                           fullWidth
-                          autoFocus
                           sx={textFieldSx}
                         />
                       </Box>

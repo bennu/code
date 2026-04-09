@@ -3,13 +3,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 
 export default function Hero() {
-  const handleNavClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
     <Box
       component="section"
@@ -93,6 +86,8 @@ export default function Hero() {
           sx={{ marginBottom: "2.5rem" }}
         >
           <Button
+            component="a"
+            href="#code"
             variant="contained"
             sx={{
               padding: "0.9rem 2.5rem",
@@ -100,12 +95,12 @@ export default function Hero() {
               fontWeight: 600,
               background: "#00bcd4",
               color: "#fff",
+              textDecoration: "none",
               "&:hover": {
                 background: "#0097a7",
                 transform: "translateY(-2px)",
               },
             }}
-            onClick={() => handleNavClick("initializer")}
           >
             Comenzar
           </Button>

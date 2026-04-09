@@ -451,7 +451,7 @@ export default function Initializer() {
 
   /* focus input */
   useEffect(() => {
-    inputRef.current?.focus()
+    inputRef.current?.focus({ preventScroll: true })
   }, [phase])
 
   /* ── phase 1: number keys 1/2/3 → project type ── */
@@ -801,7 +801,6 @@ export default function Initializer() {
                   }}
                   placeholder="my-awesome-app"
                   variant="standard"
-                  autoFocus
                   sx={{
                     flex: 1,
                     "& .MuiInput-root": {
@@ -931,7 +930,6 @@ export default function Initializer() {
                   }}
                   placeholder="com.example"
                   variant="standard"
-                  autoFocus
                   sx={{
                     flex: 1,
                     "& .MuiInput-root": {
