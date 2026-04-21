@@ -25,17 +25,17 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Login a GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v3.4.0
         with:
           registry: ${{ env.IMAGE_REGISTRY_URL }}
           username: ${{ env.IMAGE_REGISTRY_USER }}
           password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
 
       - name: Build & Push imagen
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{ env.DOCKERFILE }}
