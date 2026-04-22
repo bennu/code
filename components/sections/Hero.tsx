@@ -12,7 +12,8 @@ export default function Hero() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "2rem",
+        py: "2rem",
+        px: 0,
         position: "relative",
         overflow: "hidden",
         marginTop: "60px",
@@ -43,11 +44,11 @@ export default function Hero() {
           variant="h1"
           sx={{
             fontFamily: "var(--font-syne)",
-            fontSize: { xs: "3rem", sm: "4rem", md: "5rem" },
+            fontSize: { xs: "2.5rem", sm: "4rem", md: "5rem" },
             fontWeight: 800,
             lineHeight: 1.1,
             marginBottom: "1rem",
-            letterSpacing: "-3px",
+            letterSpacing: { xs: "-0.5px", sm: "-2px", md: "-3px" },
             color: "text.primary",
           }}
         >

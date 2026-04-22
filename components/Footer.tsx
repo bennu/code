@@ -1,26 +1,23 @@
 "use client"
 
-import { Box, Typography, useTheme } from "@mui/material"
+import { Box } from "@mui/material"
 
 export default function Footer() {
-  const theme = useTheme()
-  const dark = theme.palette.mode === "dark"
-
   return (
     <Box
       component="footer"
       sx={{
-        background: dark ? "#0a0a0a" : "#1a1a1a",
-        color: dark ? "#555" : "#999",
+        background: "#111",
+        borderTop: "1px solid #2a2a2a",
+        padding: "1.5rem 1rem",
         textAlign: "center",
-        padding: "2rem",
-        borderTop: dark ? "1px solid #222" : "1px solid #333",
-        marginTop: "4rem",
+        fontFamily: "var(--font-dm-sans)",
+        fontSize: { xs: "0.8rem", sm: "0.9rem" },
+        color: "#888",
+        lineHeight: 1.6,
       }}
     >
-      <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
-        &copy; 2026 Bennu code. Hecho con ❤️ para desarrolladores.
-      </Typography>
+      &copy; 2026 Bennu code. Hecho con ❤️ para desarrolladores.
     </Box>
   )
 }
