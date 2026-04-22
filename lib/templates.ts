@@ -118,6 +118,7 @@ export const FRONTEND_TEMPLATES: TemplateItem[] = [
     badge: "Angular",
     logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/angular.svg",
     logoColor: "#DD0031",
+    comingSoon: true,
   },
 ]
 
