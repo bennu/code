@@ -1,14 +1,13 @@
 name: CI/CD Bennu Code
 
 on:
-  push:
-    branches:
-      - feat/ci-cd
+  release:
+    types: [published]
 
 env:
   GIT_USERNAME: ${{ github.actor }}
   GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_TAG: latest
+  IMAGE_TAG: ${{ github.event.release.tag_name }}
   DOCKERFILE: ${{ secrets.DOCKERFILE || './Dockerfile' }}
   IMAGE_NAME: ghcr.io/${{ github.repository }}
   IMAGE_REGISTRY_URL: ${{ secrets.IMAGE_REGISTRY_URL || 'https://ghcr.io' }}
